@@ -63,6 +63,11 @@ class muonScaleResProducer(Module):
         else:
             pt_corr = list(
                 mu.pt * mk_safe(
+                    roccor.kScaleDT,
+                    mu.charge, mu.pt, mu.eta, mu.phi
+                ) for mu in muons)
+            pt_err = list(
+                mu.pt * mk_safe(
                     roccor.kScaleDTerror,
                     mu.charge, mu.pt, mu.eta, mu.phi
                 ) for mu in muons)
