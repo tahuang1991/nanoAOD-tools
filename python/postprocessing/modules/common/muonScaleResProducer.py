@@ -86,3 +86,6 @@ class muonScaleResProducer(Module):
 muonScaleRes2016 = lambda : muonScaleResProducer('roccor.Run2.v3', 'RoccoR2016.txt', 2016)
 muonScaleRes2017 = lambda : muonScaleResProducer('roccor.Run2.v3', 'RoccoR2017.txt', 2017)
 muonScaleRes2018 = lambda : muonScaleResProducer('roccor.Run2.v3', 'RoccoR2018.txt', 2018)
+# the Rochester guys don't supply a unified interface. The 2016 corrections come as many files in a
+# directory and the 2017 correction are in a single file.
+

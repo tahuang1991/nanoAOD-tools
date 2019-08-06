@@ -18,6 +18,7 @@ class puWeightProducer(Module):
 	        self.myh = self.loadHisto(myfile,myhist)
 	else :
         	self.fixLargeWeights = False #AR: it seems to crash with it, to be deugged
+        	#self.fixLargeWeights = True #AR: it seems to crash with it, to be deugged
 		self.autoPU=True
 		ROOT.gROOT.cd()
 		self.myh=self.targeth.Clone("autoPU")
@@ -27,6 +28,7 @@ class puWeightProducer(Module):
         self.verbose = verbose
         self.nvtxVar = nvtx_var
         self.doSysVar = doSysVar
+	#print "PU reweight, MC truth PU profile ",myfile
        
         #Try to load module via python dictionaries
         try:
@@ -56,6 +58,7 @@ class puWeightProducer(Module):
 		print "Computing PU profile for this file"
 		ROOT.gROOT.cd()
 		inputFile.Get("Events").Project("autoPU",self.nvtxVar)#doitfrom inputFile
+	        #self.myh.Print("ALL")
 		if outputFile : 
 		    outputFile.cd()
 		    self.myh.Write()    
@@ -78,6 +81,7 @@ class puWeightProducer(Module):
                 weight_plus = self._worker_plus.getWeight(nvtx) if nvtx < self.myh.GetNbinsX() else 1
                 weight_minus = self._worker_minus.getWeight(nvtx) if nvtx < self.myh.GetNbinsX() else 1
         else: weight = 1
+	#print "nvtx ",nvtx, " PUweight ",weight
         self.out.fillBranch(self.name,weight)
         if self.doSysVar:
             self.out.fillBranch(self.name+"Up",weight_plus)
